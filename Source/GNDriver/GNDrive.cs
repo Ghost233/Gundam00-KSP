@@ -23,10 +23,6 @@ namespace Gundam00
         [KSPField]
         private float electricGenCountPerSecond = -5.0f;
 
-        //有害粒子释放速率
-        [KSPField]
-        private float selfInjuryGenCountPerSecond = -1.0f;        
-
         //可同步炉子数量
         [KSPField]
         public float maxenginecount = 2F;
@@ -66,12 +62,10 @@ namespace Gundam00
             float GNGreenParticleGen = this.GNGreenParticleGenCountPerSecond * percentSecond;
             float GNRedParticleGen = this.GNRedParticleGenCountPerSecond * percentSecond;
             float electricGen = this.electricGenCountPerSecond * percentSecond;
-            float selfInjuryGen = this.selfInjuryGenCountPerSecond * percentSecond;
 
             float responseGNGreenParticleGen = this.part.RequestResource(GNDriveDefine.greenParticleResourceName, GNGreenParticleGen);
             float responseGNRedParticleGen = this.part.RequestResource(GNDriveDefine.redParticleResourceName, GNRedParticleGen);
             float responseelectricGen = this.part.RequestResource(GNDriveDefine.electricResourceName, electricGen);
-            float responseselfInjuryGen = this.part.RequestResource(GNDriveDefine.selfInjuryResourceName, selfInjuryGen);
 
             lastFixedUpdate = time;
         }

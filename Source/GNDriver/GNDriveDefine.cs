@@ -11,7 +11,6 @@ namespace Gundam00
         static public string electricResourceName = "ElectricCharge";
         static public string greenParticleResourceName = "GNGreenParticle";
         static public string redParticleResourceName = "GNRedParticle";
-        static public string selfInjuryResourceName = "SelfInjuryParticle";
         static public float timeSecond = 1.0f;
         static public float ForcePerParticle = 1.0f;
     }
