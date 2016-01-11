@@ -5,9 +5,17 @@ using KSP;
 
 namespace Gundam00
 {
-    public class GNRcs : ModuleRCS
+    public class GNRcs : ModuleRCS, GNControlProtocol
     {
-        
+        public void engineTransAM()
+        {
+
+        }
+
+        public void limiterLift()
+        {
+
+        }
     }
 
 }

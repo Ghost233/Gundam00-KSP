@@ -9,7 +9,7 @@ namespace Gundam00
     public class GNDrive : PartModule
     {
         //时间参数
-        private float lastFixedUpdate = 0.0f;
+        private float lastUpdateTime = 0.0f;
 
         //GN红色粒子补充速率
         [KSPField]
@@ -49,7 +49,7 @@ namespace Gundam00
 
         public override void OnStart(PartModule.StartState state)
         {
-            lastFixedUpdate = Time.time;
+            lastUpdateTime = Time.time;
             this.part.force_activate();
         }
 
@@ -71,26 +71,24 @@ namespace Gundam00
             return true; 
         }
 
-        public override void OnFixedUpdate()
+        public override void OnUpdate()
         {
+            base.OnUpdate();
+
             float time = Time.time;
-            float timeInterval = time - lastFixedUpdate;
+            float timeInterval = time - lastUpdateTime;
             float percentSecond = timeInterval / GNDriveDefine.timeSecond;
 
             float restoneLast = 0;
             this.restoreGenerateEfficiency(-percentSecond, out restoneLast);
-
-            Debug.Log(-percentSecond + "           " + particleGenerateEfficiencyCount);
-
+            
             float GNRedParticleGen = this.GNRedParticleGenCountPerSecond * percentSecond * particleGenerateEfficiency;
             float electricGen = this.electricGenCountPerSecond * percentSecond * particleGenerateEfficiency;
 
             float responseGNRedParticleGen = this.part.RequestResource(GNDriveDefine.redParticleResourceName, GNRedParticleGen);
             float responseElectricGen = this.part.RequestResource(GNDriveDefine.electricResourceName, electricGen);
 
-            Debug.Log("ClassID:" + this.ClassID + "   UnityID" + this.GetInstanceID() + "   particleGenerateEfficiency " + particleGenerateEfficiency + "   GNRedParticleGen:" + GNRedParticleGen + "   electricGen" + electricGen);
-
-            lastFixedUpdate = time;
+            lastUpdateTime = time;
         }
     }
 }

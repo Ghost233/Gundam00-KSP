@@ -52,6 +52,7 @@
     <Compile Include="GNRcs.cs" />
     <Compile Include="GNSystemControl.cs" />
     <Compile Include="GNTDBlanket.cs" />
+    <Compile Include="GNControlProtocol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

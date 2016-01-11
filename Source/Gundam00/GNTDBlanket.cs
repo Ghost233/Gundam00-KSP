@@ -9,7 +9,7 @@ namespace Gundam00
     public class GNTDBlanket : PartModule
     {
         //时间参数
-        private float lastFixedUpdate = 0.0f;
+        private float lastUpdateTime = 0.0f;
 
         //GN红色粒子转换速率
         [KSPField]
@@ -29,14 +29,16 @@ namespace Gundam00
 
         public override void OnStart(PartModule.StartState state)
         {
-            lastFixedUpdate = Time.time;
+            lastUpdateTime = Time.time;
             this.part.force_activate();
         }
 
-        public override void OnFixedUpdate()
+        public override void OnUpdate()
         {
+            base.OnUpdate();
+            
             float time = Time.time;
-            float timeInterval = time - lastFixedUpdate;
+            float timeInterval = time - lastUpdateTime;
             float percentSecond = timeInterval / GNDriveDefine.timeSecond;
 
             this.restore(percentSecond * restoreGenerateEfficiencyPerSecond);
@@ -44,14 +46,14 @@ namespace Gundam00
             float GNRedParticleGen = this.GNRedParticleConsumeCountPerSecond * percentSecond;
 
             float GNGreenParticleGen = -this.part.RequestResource(GNDriveDefine.redParticleResourceName, GNRedParticleGen);
-            
+
             float responseGNGreenParticleGen = this.part.RequestResource(GNDriveDefine.greenParticleResourceName, GNGreenParticleGen * GNGreenConvertEfficiency);
 
             Debug.Log("ClassID:" + this.ClassID + "   UnityID" + this.GetInstanceID() + "   GNRedParticleGen " + GNRedParticleGen + "   GNGreenParticleGen:" + GNGreenParticleGen + "   responseGNGreenParticleGen" + responseGNGreenParticleGen);
 
-            lastFixedUpdate = time;
+            lastUpdateTime = time;
         }
-
+        
         private void restore(float percent)
         {
             List<GNDrive> GNDriveList = new List<GNDrive>();

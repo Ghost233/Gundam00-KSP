@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Gundam00
 {
-    public class GNEngine : ModuleEnginesFX
+    public class GNEngine : ModuleEnginesFX, GNControlProtocol
     {
         //时间参数
         private float lastFixedUpdate = 0.0f;
@@ -97,6 +97,16 @@ namespace Gundam00
             antiGravityConsumeParticleMassString = antiGravityConsumeParticleMass.ToString("R");
 
             lastFixedUpdate = time;
+        }
+
+        public void engineTransAM()
+        {
+
+        }
+
+        public void limiterLift()
+        {
+
         }
     }
 }
