@@ -59,9 +59,9 @@ namespace Gundam00
             lastFixedUpdate = Time.time;
         }
 
-        new public void FixedUpdate()
+        public override void OnFixedUpdate()
         {
-            base.FixedUpdate();
+            base.OnFixedUpdate();
 
             float time = Time.time;
             float timeInterval = time - lastFixedUpdate;
